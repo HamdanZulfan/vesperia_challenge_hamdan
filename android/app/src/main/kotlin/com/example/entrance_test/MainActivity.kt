@@ -1,4 +1,4 @@
-package com.example.entrance_test
+package id.vesperia.challenge_hamdan
 
 import io.flutter.embedding.android.FlutterActivity
 

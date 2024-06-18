@@ -1,3 +1,4 @@
+import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_state_manager/src/rx_flutter/rx_obx_widget.dart';
@@ -39,30 +40,30 @@ class ProfilePage extends GetView<ProfileController> {
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
                           Obx(() => ClipOval(
-                            child: CachedNetworkImage(
-                              width: 48,
-                              height: 48,
-                              imageUrl: controller.profilePictureUrl,
-                              fit: BoxFit.cover,
-                              progressIndicatorBuilder: (context, url,
-                                  downloadProgress) =>
-                                  CircularProgressIndicator(
-                                      value: downloadProgress.progress),
-                              errorWidget: (context, url, error) =>
-                                  Image.asset(
+                                child: CachedNetworkImage(
+                                  width: 48,
+                                  height: 48,
+                                  imageUrl: controller.profilePictureUrl,
+                                  fit: BoxFit.cover,
+                                  progressIndicatorBuilder:
+                                      (context, url, downloadProgress) =>
+                                          CircularProgressIndicator(
+                                              value: downloadProgress.progress),
+                                  errorWidget: (context, url, error) =>
+                                      Image.asset(
                                     width: 48,
                                     height: 48,
                                     defaultProfileImage,
                                     fit: BoxFit.cover,
                                   ),
-                            ),
-                          )),
+                                ),
+                              )),
                           const SizedBox(width: 16),
                           Expanded(
                               child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Obx(() => Text(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Obx(() => Text(
                                     controller.name,
                                     style: const TextStyle(
                                       fontSize: 14,
@@ -70,8 +71,8 @@ class ProfilePage extends GetView<ProfileController> {
                                       fontWeight: FontWeight.w600,
                                     ),
                                   )),
-                                  const SizedBox(height: 4),
-                                  Obx(() => Text(
+                              const SizedBox(height: 4),
+                              Obx(() => Text(
                                     controller.phone,
                                     style: const TextStyle(
                                       fontSize: 14,
@@ -79,8 +80,8 @@ class ProfilePage extends GetView<ProfileController> {
                                       fontWeight: FontWeight.w400,
                                     ),
                                   )),
-                                ],
-                              )),
+                            ],
+                          )),
                           Image.asset(
                             ic_arrow_right,
                             height: 20,
@@ -95,16 +96,27 @@ class ProfilePage extends GetView<ProfileController> {
               const Divider(thickness: 4, color: gray100, height: 4),
               Column(
                 children: [
-                  iconTileProfile(ic_test_unauthenticated, "Test 401",
-                      () {
-                    controller.onTestUnauthenticatedClick();
-                  }),
-                  iconTileProfile(ic_download, "Download File", () {
-                    controller.onDownloadFileClick();
-                  }),
-                  iconTileProfile(ic_webpage, "Open Webpage", () {
-                    controller.onOpenWebPageClick();
-                  }),
+                  iconTileProfile(
+                    ic_test_unauthenticated,
+                    "Test 401",
+                    () {
+                      controller.onTestUnauthenticatedClick();
+                    },
+                  ),
+                  iconTileProfile(
+                    ic_download,
+                    "Download File",
+                    () {
+                      controller.onDownloadFileClick();
+                    },
+                  ),
+                  iconTileProfile(
+                    ic_webpage,
+                    "Open Webpage",
+                    () {
+                      controller.onOpenWebPageClick();
+                    },
+                  ),
                   const SizedBox(height: 16),
                   Container(
                     padding: const EdgeInsets.symmetric(
@@ -157,19 +169,28 @@ class ProfilePage extends GetView<ProfileController> {
       );
 
   Widget signOutButton(BuildContext context) => SizedBox(
-      height: 52,
-      width: double.infinity,
-      child: SizedBox(
         height: 52,
         width: double.infinity,
-        child: ButtonIcon(
-          buttonColor: red50,
-          textColor: red600,
-          textLabel: "Sign Out",
-          onClick: () {
-            controller.doLogout();
-          },
+        child: SizedBox(
+          height: 52,
+          width: double.infinity,
+          child: ButtonIcon(
+            buttonColor: red50,
+            textColor: red600,
+            textLabel: "Sign Out",
+            onClick: () {
+              AwesomeDialog(
+                      context: context,
+                      dialogType: DialogType.info,
+                      title: 'Logutt',
+                      desc: 'Apakah anda ingn keluar?',
+                      btnOkOnPress: () {
+                        controller.doLogout();
+                      },
+                      btnCancelOnPress: () {})
+                  .show();
+            },
+          ),
         ),
-      ),
-  );
+      );
 }
