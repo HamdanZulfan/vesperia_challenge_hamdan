@@ -183,7 +183,7 @@ class ProfilePage extends GetView<ProfileController> {
                       context: context,
                       dialogType: DialogType.info,
                       title: 'Logutt',
-                      desc: 'Apakah anda ingn keluar?',
+                      desc: 'Apakah anda ingin keluar?',
                       btnOkOnPress: () {
                         controller.doLogout();
                       },
